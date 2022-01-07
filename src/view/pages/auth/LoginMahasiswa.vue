@@ -201,11 +201,17 @@ export default {
           }
         });
 
-        console.log(response);
-
-        if (response) {
-          // this.$router.push({ name: "dashboard" });
+        if (response.data && response.data.token) {
+          console.log(response.data);
+          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("role", response.data.rule);
+          localStorage.setItem("name", response.data.name);
+          localStorage.setItem("nim", response.data.nim);
+          localStorage.setItem("email", response.data.email);
+          this.$router.push({ name: "dashboard" });
         }
+
+        
       } catch (err) {
         console.log(err.response.data.message);
         Swal.fire({
