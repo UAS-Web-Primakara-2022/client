@@ -61,7 +61,7 @@
         ]"
       >
         <a :href="href" class="menu-link" @click="navigate">
-          <i class="menu-icon fas fa-check"></i>
+          <i class="menu-icon fas fa-book"></i>
           <span class="menu-text">List Aktivitas</span>
         </a>
       </li>
@@ -89,6 +89,7 @@
     </router-link>
 
     <router-link
+      v-if="user.role === 'admin'"
       to="/mahasiswamanage"
       v-slot="{ href, navigate, isActive, isExactActive }"
     >
@@ -107,6 +108,7 @@
         </a>
       </li>
     </router-link>
+
     <router-link
       v-if="user.role === 'admin'"
       to="/usermanage"

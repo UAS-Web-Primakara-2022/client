@@ -10,6 +10,10 @@ export default new Router({
       path: "/",
       redirect: "/dashboard",
       component: () => import("@/view/layout/Layout"),
+      beforeEnter: (to, from, next) => {
+        if (localStorage.getItem("token")) next();
+        else next("/login");
+      },
       children: [
         {
           path: "/dashboard",
@@ -29,7 +33,7 @@ export default new Router({
         {
           path: "/listaktas",
           name: "listaktas",
-          component: () => import("@/view/pages/kmhs/ValidasiAktivitas.vue")
+          component: () => import("@/view/pages/kmhs/ListAktivitas.vue")
         },
         {
           path: "/pencarianaktas",
@@ -56,12 +60,20 @@ export default new Router({
     {
       path: "/login",
       name: "login",
-      component: () => import("@/view/pages/auth/LoginMahasiswa")
+      component: () => import("@/view/pages/auth/LoginMahasiswa"),
+      beforeEnter: (to, from, next) => {
+        if (!localStorage.getItem("token")) next();
+        else next("/dashboard");
+      }
     },
     {
       path: "/login/admin",
       name: "loginAdmin",
-      component: () => import("@/view/pages/auth/LoginAdmin")
+      component: () => import("@/view/pages/auth/LoginAdmin"),
+      beforeEnter: (to, from, next) => {
+        if (!localStorage.getItem("token")) next();
+        else next("/dashboard");
+      }
     },
     {
       // the 404 route, when none of the above matches
