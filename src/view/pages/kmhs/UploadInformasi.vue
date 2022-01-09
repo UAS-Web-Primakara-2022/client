@@ -1,6 +1,6 @@
 <template>
   <KTCard ref="preview" v-bind:title="title" v-bind:example="true">
-    <template v-slot:title v-if="hasTitleSlot">
+    <template v-slot:title v-if="false">
       <h3 class="card-title">
         <slot name="title"></slot>
       </h3>
@@ -10,8 +10,8 @@
       <!--begin::Code example-->
 
       <h4>
-        Form Informasi
-        <i class="fas fa-info-circle text-warning icon-lg ml-1"></i>
+        Form Upload TAK
+        <!-- <i class="fas fa-info-circle text-warning icon-lg ml-1"></i> -->
       </h4>
 
       <div role="group" class="mt-12">
