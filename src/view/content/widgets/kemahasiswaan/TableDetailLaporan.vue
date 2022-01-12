@@ -1,7 +1,7 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="detailkegiatan"
+    :items="takData"
     :search="search"
     sort-by="calories"
     class="elevation-1"
@@ -15,13 +15,21 @@
 </template>
 <script>
 export default {
+  props: {
+    takData: {
+      type: Array,
+      required: true
+    }
+  },
   data: () => ({
     dialogDelete: false,
     search: "",
     headers: [
-      { text: "Koke Mk", value: "no" },
-      { text: "Matakuliah", value: "kegiatan" },
-      { text: "Total Poin:", value: "poin" }
+      { text: "No", value: "id" },
+      { text: "Nama Kegiatan", value: "name" },
+      { text: "Poin TAK:", value: "point_TAK" },
+      { text: "Tingkatan:", value: "tingkatan" },
+      { text: "Status:", value: "verifed_status" }
     ],
     detailkegiatan: [],
     editedIndex: -1,
@@ -40,7 +48,7 @@ export default {
   computed: {},
 
   created() {
-    this.initialize();
+    // this.initialize();
   },
 
   methods: {

@@ -83,7 +83,11 @@
     </template>
 
     <template v-slot:[`item.actions`]="{ item }">
-      <router-link to="/detailaktas" v-slot="{ navigate }" custom>
+      <router-link
+        :to="`/detailaktas/${item.nim}`"
+        v-slot="{ navigate }"
+        custom
+      >
         <v-icon color="blue" size="18" class="mr-2" @click="navigate(item)">
           mdi-eye
         </v-icon>

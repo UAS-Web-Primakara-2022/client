@@ -28,7 +28,7 @@
                     href="#"
                     class="text-dark-75 text-hover-primary font-size-h5 font-weight-bold mr-3"
                   >
-                    I Putu Bagus Aryahstiax</a
+                    {{ dataMahasiswa.name }}</a
                   >
                   <a href="#"
                     ><i class="flaticon2-correct text-success font-size-h5"></i
@@ -45,13 +45,13 @@
                       href="#"
                       class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2"
                       ><i class="flaticon2-new-email mr-2 font-size-lg"></i
-                      >1701020007</a
+                      >{{ dataMahasiswa.email }}</a
                     >
                     <a
                       href="#"
                       class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2"
                       ><i class="flaticon2-calendar-3 mr-2 font-size-lg"></i>
-                      Laki-laki
+                      {{ dataMahasiswa.nim }}
                     </a>
                     <a
                       href="#"
@@ -97,7 +97,7 @@
       </div>
     </div>
     <div class="col-lg-12">
-      <TableDetailLaporan></TableDetailLaporan>
+      <TableDetailLaporan :takData="dataMahasiswa.tak"></TableDetailLaporan>
     </div>
   </div>
 </template>
@@ -106,6 +106,7 @@
 import { mapGetters } from "vuex";
 import { SET_BREADCRUMB } from "@/core/services/store/breadcrumbs.module";
 import TableDetailLaporan from "@/view/content/widgets/kemahasiswaan/TableDetailLaporan.vue";
+import axios from "@/core/api";
 
 export default {
   name: "custom-page",
@@ -115,7 +116,8 @@ export default {
   data() {
     return {
       tabIndex: 0,
-      matkul: ""
+      matkul: "",
+      dataMahasiswa: {}
     };
   },
   mounted() {
@@ -144,7 +146,21 @@ export default {
 
       // set current active tab
       target.classList.add("active");
+    },
+    async getData() {
+      const response = await axios({
+        method: "GET",
+        url: `/mahasiswa/${this.$route.params.nim}`,
+        headers: {
+          Authorization: localStorage.getItem("token")
+        }
+      });
+      console.log(response.data);
+      this.dataMahasiswa = response.data;
     }
+  },
+  created() {
+    this.getData();
   },
   computed: {
     ...mapGetters(["currentUserPersonalInfo"]),

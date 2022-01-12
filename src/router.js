@@ -46,7 +46,7 @@ export default new Router({
           component: () => import("@/view/pages/kmhs/ManageMahasiswa.vue")
         },
         {
-          path: "/detailaktas",
+          path: "/detailaktas/:nim",
           name: "detailaktas",
           component: () => import("@/view/pages/kmhs/DetailAktas.vue")
         },
