@@ -97,7 +97,10 @@
       </div>
     </div>
     <div class="col-lg-12">
-      <TableDetailLaporan :takData="dataMahasiswa.tak"></TableDetailLaporan>
+      <TableDetailLaporan
+        :takData="getTakData"
+        @reinit="getData"
+      ></TableDetailLaporan>
     </div>
   </div>
 </template>
@@ -164,6 +167,23 @@ export default {
   },
   computed: {
     ...mapGetters(["currentUserPersonalInfo"]),
+
+    getTakData() {
+      if (this.dataMahasiswa.tak) {
+        return this.dataMahasiswa.tak.map((data, index) => {
+          return {
+            no: index + 1,
+            ...data,
+            verifed_status:
+              data.verifed_status === true
+                ? "Sudah diverifikasi"
+                : "Belum diverifikasi"
+          };
+        });
+      } else {
+        return [];
+      }
+    },
 
     getFullName() {
       return (
