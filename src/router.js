@@ -18,44 +18,44 @@ export default new Router({
         {
           path: "/dashboard",
           name: "dashboard",
-          component: () => import("@/view/pages/Dashboard.vue")
+          component: () => import("@/view/pages/Dashboard.vue"),
         },
         {
           path: "/uploadinfo",
           name: "uploadinfo",
-          component: () => import("@/view/pages/kmhs/UploadInformasi.vue")
+          component: () => import("@/view/pages/kmhs/UploadInformasi.vue"),
         },
         {
           path: "/validasiaktas",
           name: "validasiaktas",
-          component: () => import("@/view/pages/kmhs/ValidasiAktivitas.vue")
+          component: () => import("@/view/pages/kmhs/ValidasiAktivitas.vue"),
         },
         {
           path: "/listaktas",
           name: "listaktas",
-          component: () => import("@/view/pages/kmhs/ListAktivitas.vue")
+          component: () => import("@/view/pages/kmhs/ListAktivitas.vue"),
         },
         {
           path: "/pencarianaktas",
           name: "pencarianaktas",
-          component: () => import("@/view/pages/kmhs/PencarianAktivitas.vue")
+          component: () => import("@/view/pages/kmhs/PencarianAktivitas.vue"),
         },
         {
           path: "/mahasiswamanage",
           name: "mahasiswamanage",
-          component: () => import("@/view/pages/kmhs/ManageMahasiswa.vue")
+          component: () => import("@/view/pages/kmhs/ManageMahasiswa.vue"),
         },
         {
           path: "/detailaktas/:nim",
           name: "detailaktas",
-          component: () => import("@/view/pages/kmhs/DetailAktas.vue")
+          component: () => import("@/view/pages/kmhs/DetailAktas.vue"),
         },
         {
           path: "/usermanage",
           name: "usermanage",
-          component: () => import("@/view/pages/kmhs/ManageUser.vue")
-        }
-      ]
+          component: () => import("@/view/pages/kmhs/ManageUser.vue"),
+        },
+      ],
     },
     {
       path: "/login",
@@ -64,22 +64,22 @@ export default new Router({
       beforeEnter: (to, from, next) => {
         if (!localStorage.getItem("token")) next();
         else next("/dashboard");
-      }
+      },
     },
     {
-      path: "/login/admin",
+      path: "/admin",
       name: "loginAdmin",
       component: () => import("@/view/pages/auth/LoginAdmin"),
       beforeEnter: (to, from, next) => {
         if (!localStorage.getItem("token")) next();
         else next("/dashboard");
-      }
+      },
     },
     {
       // the 404 route, when none of the above matches
       path: "*",
       name: "404",
-      component: () => import("@/view/pages/error/Error-3.vue")
-    }
-  ]
+      component: () => import("@/view/pages/error/Error-3.vue"),
+    },
+  ],
 });
