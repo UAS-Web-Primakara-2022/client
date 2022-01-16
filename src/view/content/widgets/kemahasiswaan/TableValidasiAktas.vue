@@ -253,11 +253,9 @@ export default {
               : "Belum diverifikasi"
         };
       });
-      console.log(this.listaktivitas);
     },
 
     editItem(item) {
-      console.log(this.listaktivitas.indexOf(item));
       this.editedIndex = this.listaktivitas.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
@@ -288,7 +286,6 @@ export default {
           cancelButtonText: "Tidak",
           heightAuto: false
         }).then(async result => {
-          console.log(takPoint);
           if (result.value && takPoint > 0) {
             try {
               const response = await axios({

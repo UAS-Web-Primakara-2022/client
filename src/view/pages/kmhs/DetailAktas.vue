@@ -159,7 +159,6 @@ export default {
           Authorization: localStorage.getItem("token")
         }
       });
-      console.log(response.data);
       this.dataMahasiswa = response.data;
     }
   },

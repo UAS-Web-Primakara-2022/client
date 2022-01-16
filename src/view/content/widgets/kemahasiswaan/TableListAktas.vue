@@ -282,11 +282,9 @@ export default {
               : "Belum diverifikasi"
         };
       });
-      console.log(this.listaktivitas);
     },
 
     editItem(item) {
-      console.log(item);
       this.editedIndex = this.listaktivitas.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;

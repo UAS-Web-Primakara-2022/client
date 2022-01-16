@@ -202,7 +202,6 @@ export default {
         });
 
         if (response.data && response.data.token) {
-          console.log(response.data);
           localStorage.setItem("token", response.data.token);
           localStorage.setItem("role", response.data.role);
           localStorage.setItem("name", response.data.name);
@@ -211,7 +210,6 @@ export default {
           this.$router.push({ name: "dashboard" });
         }
       } catch (err) {
-        console.log(err.response.data.message);
         Swal.fire({
           title: "",
           text: err.response.data.message || "Wrong email or password!",

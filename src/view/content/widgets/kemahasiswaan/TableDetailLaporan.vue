@@ -260,7 +260,6 @@ export default {
 
   methods: {
     editItem(item) {
-      console.log(this.takData.indexOf(item));
       this.editedIndex = this.takData.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
@@ -279,7 +278,6 @@ export default {
     },
 
     async save() {
-      console.log("masdasdas");
       if (this.editedIndex > -1) {
         if (this.editedItem.point_TAK <= 0)
           return errorAlert("Poin TAK tidak boleh 0");
@@ -296,7 +294,6 @@ export default {
           cancelButtonText: "Tidak",
           heightAuto: false
         }).then(async result => {
-          console.log(takPoint);
           if (result.value && takPoint > 0) {
             try {
               const response = await axios({
