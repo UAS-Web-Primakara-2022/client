@@ -278,6 +278,20 @@ export default {
     },
 
     async save() {
+      if (
+        !this.editItem.nim ||
+        !this.editItem.name ||
+        !this.editedItem.email ||
+        !this.editedItem.password ||
+        !this.editedItem.angkatan ||
+        !this.editedItem.prodi ||
+        !this.editedItem.jenis_kelamin ||
+        !this.editedItem.tanggal_lahir
+      ) {
+        return errorAlert(
+          "Tidak boleh ada data yang kosong, harus diisi semua!"
+        );
+      }
       try {
         let response;
         if (this.editedIndex > -1) {

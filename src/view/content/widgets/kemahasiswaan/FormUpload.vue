@@ -34,7 +34,7 @@
 <script>
 import { validationMixin } from "vuelidate";
 import { required, maxLength, email } from "vuelidate/lib/validators";
-import { successAlert } from "@/core/plugins/my-swal";
+import { successAlert, errorAlert } from "@/core/plugins/my-swal";
 import axios from "@/core/api";
 
 export default {
@@ -80,6 +80,11 @@ export default {
 
   methods: {
     async submit() {
+      if (!this.tingkatan || !this.name || !this.files) {
+        return errorAlert(
+          "Tidak boleh ada data yang kosong, harus diisi semua!"
+        );
+      }
       try {
         const formData = new FormData();
         formData.append("name", this.name);

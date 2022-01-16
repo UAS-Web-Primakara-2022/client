@@ -199,6 +199,16 @@ export default {
     },
 
     async save() {
+      if (
+        !this.editItem.nidn ||
+        !this.editItem.name ||
+        !this.editedItem.email ||
+        !this.editedItem.password
+      ) {
+        return errorAlert(
+          "Tidak boleh ada data yang kosong, harus diisi semua!"
+        );
+      }
       try {
         let response;
         if (this.editedIndex > -1) {
