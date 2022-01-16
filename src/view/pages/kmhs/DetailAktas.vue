@@ -56,16 +56,17 @@
                     <a
                       href="#"
                       class="text-dark-50 text-hover-primary font-weight-bold"
-                      ><i class="flaticon2-placeholder mr-2 font-size-lg"></i>2
-                      Maret 1984</a
-                    >
+                      ><i class="flaticon2-placeholder mr-2 font-size-lg"></i>
+                      {{ getBirthDate }}
+                    </a>
                   </div>
 
                   <span class="font-weight-bold text-dark-50"
-                    >Mahasiswa angkatan 2017 STMIK Primakara
+                    >Mahasiswa angkatan {{ dataMahasiswa.angkatan }} STMIK
+                    Primakara
                   </span>
                   <span class="font-weight-bold text-dark-50"
-                    >Program Studi Teknik Informatika</span
+                    >Program Studi {{ getProdi }}</span
                   >
                 </div>
 
@@ -167,6 +168,31 @@ export default {
   },
   computed: {
     ...mapGetters(["currentUserPersonalInfo"]),
+
+    getProdi() {
+      if (this.dataMahasiswa.prodi === "IF") {
+        return "Informatika";
+      } else if (this.dataMahasiswa.prodi === "SI") {
+        return "Sistem Informasi";
+      } else if (this.dataMahasiswa.prodi === "SIA") {
+        return "Sistem Informasi Akuntansi";
+      } else {
+        return "";
+      }
+    },
+
+    getGender() {
+      if (this.dataMahasiswa.jenis_kelamin === "L") {
+        return "Laki-laki";
+      } else {
+        return "Perempuan";
+      }
+    },
+
+    getBirthDate() {
+      let date = new Date(this.dataMahasiswa.birth_date);
+      return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+    },
 
     getTakData() {
       if (this.dataMahasiswa.tak) {

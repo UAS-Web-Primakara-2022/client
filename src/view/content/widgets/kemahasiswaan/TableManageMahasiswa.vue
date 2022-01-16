@@ -51,6 +51,70 @@
                   </v-col>
                   <v-col cols="12">
                     <v-text-field
+                      type="number"
+                      v-model="editedItem.angkatan"
+                      label="Angkatan"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12">
+                    <v-select
+                      :items="jkSelect"
+                      item-text="state"
+                      item-value="abbr"
+                      label="Jenis Kelamin"
+                      v-model="editedItem.jenis_kelamin"
+                    ></v-select>
+                  </v-col>
+                  <v-col cols="12">
+                    <v-select
+                      :items="prodiSelect"
+                      item-text="state"
+                      item-value="abbr"
+                      label="Program Studi"
+                      v-model="editedItem.prodi"
+                    ></v-select>
+                  </v-col>
+                  <v-col cols="12">
+                    <v-menu
+                      ref="menu"
+                      v-model="menu"
+                      :close-on-content-click="false"
+                      :return-value.sync="editedItem.tanggal_lahir"
+                      transition="scale-transition"
+                      offset-y
+                      min-width="auto"
+                    >
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-text-field
+                          v-model="editedItem.tanggal"
+                          label="Tanggal Lahir"
+                          prepend-icon="mdi-calendar"
+                          readonly
+                          v-bind="attrs"
+                          v-on="on"
+                        ></v-text-field>
+                      </template>
+                      <v-date-picker
+                        v-model="editedItem.tanggal"
+                        no-title
+                        scrollable
+                      >
+                        <v-spacer></v-spacer>
+                        <v-btn text color="primary" @click="menu = false">
+                          Cancel
+                        </v-btn>
+                        <v-btn
+                          text
+                          color="primary"
+                          @click="$refs.menu.save(editedItem.tanggal)"
+                        >
+                          OK
+                        </v-btn>
+                      </v-date-picker>
+                    </v-menu>
+                  </v-col>
+                  <v-col cols="12">
+                    <v-text-field
                       v-model="editedItem.password"
                       :disabled="editedIndex !== -1 ? !status : false"
                       label="Password"
@@ -114,6 +178,7 @@ import { successAlert, errorAlert, Swal } from "@/core/plugins/my-swal";
 export default {
   data: () => ({
     dialog: false,
+    menu: false,
     tanggal: false,
     status: false,
     search: "",
@@ -124,19 +189,36 @@ export default {
       { text: "Email", value: "email" },
       { text: "Actions", value: "actions", sortable: false }
     ],
+    jkSelect: [
+      { state: "Pria", abbr: "PRIA" },
+      { state: "Wanita", abbr: "WANITA" }
+    ],
+    prodiSelect: [
+      { state: "Sistem Informasi", abbr: "SI" },
+      { state: "Sistem Informasi Akuntansi", abbr: "SIA" },
+      { state: "Informatika", abbr: "IF" }
+    ],
     daftarmahasiswa: [],
     editedIndex: -1,
     editedItem: {
       nim: "",
       name: "",
       password: "",
-      email: ""
+      email: "",
+      jenis_kelamin: "",
+      prodi: "",
+      tanggal_lahir: "",
+      angkatan: ""
     },
     defaultItem: {
       name: "",
       nim: "",
+      password: "",
       email: "",
-      password: ""
+      jenis_kelamin: "",
+      prodi: "",
+      tanggal_lahir: "",
+      angkatan: ""
     }
   }),
 
@@ -217,7 +299,11 @@ export default {
               nim: Number(this.editedItem.nim),
               name: this.editedItem.name,
               email: this.editedItem.email,
-              password: this.editedItem.password
+              password: this.editedItem.password,
+              angkatan: Number(this.editedItem.angkatan),
+              prodi: this.editedItem.prodi,
+              gender: this.editedItem.jenis_kelamin,
+              birthDate: this.editedItem.tanggal_lahir
             },
             headers: {
               Authorization: localStorage.getItem("token")
