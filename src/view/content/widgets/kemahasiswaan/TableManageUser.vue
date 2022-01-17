@@ -200,8 +200,8 @@ export default {
 
     async save() {
       if (
-        !this.editItem.nidn ||
-        !this.editItem.name ||
+        !this.editedItem.nidn ||
+        !this.editedItem.name ||
         !this.editedItem.email ||
         !this.editedItem.password
       ) {

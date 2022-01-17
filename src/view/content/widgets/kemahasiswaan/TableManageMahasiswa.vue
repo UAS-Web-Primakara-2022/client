@@ -279,8 +279,8 @@ export default {
 
     async save() {
       if (
-        !this.editItem.nim ||
-        !this.editItem.name ||
+        !this.editedItem.nim ||
+        !this.editedItem.name ||
         !this.editedItem.email ||
         !this.editedItem.password ||
         !this.editedItem.angkatan ||
